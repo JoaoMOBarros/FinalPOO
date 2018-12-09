@@ -37,9 +37,9 @@ public class UserManagment {
         }
         return "User not found";
     }
-    public String whosLogged(){
+    public User whosLogged(){//Função que retorna o usuário que está logado
         if(loggedUser != null)
-            return loggedUser.toString();
+            return loggedUser;
         return "No user logged";
     }
 
