@@ -6,29 +6,29 @@ public class UserManagment {
     public ArrayList<User> users = new ArrayList<User>();
     public User loggedUser;
 
-    public String createUser(String newName, int isManager){
+    public String createUser(String newName, int isManager){//Cria usuários apenas se um usário de mesmo nome ainda não existe
         for(User user : users){
-            if(newName.equals(user.getName())){
+            if(newName.equals(user.getName())){//comparação para ver se é igual algum existente
                 return "User already exists";
             }
-        }
+        }//se não é igual, cria uma instancia de User e adiciona na lista de users
         User newUser = new User(newName, isManager);
         users.add(newUser);
         return "User created";
     }
 
-    public String removeUser(String nameToRemove){
+    public String removeUser(String nameToRemove){//Remoção de usuários
         for(User user: users){
             if(nameToRemove.equals(user.getName())) {
-                users.remove(user);
+                users.remove(user);//procura o usuário na lista e remove
                 return "User removed";
             }
-        }
+        }//se não achou o usuário, não faz nada
         return"User not found";
     }
 
 
-    public String login(String name){
+    public String login(String name){//seta a variável login para o user que foi passado o nome
         for(User user : users){
             if(name.equals(user.getName())){
                loggedUser = user;
@@ -37,8 +37,13 @@ public class UserManagment {
         }
         return "User not found";
     }
+    public String whosLogged(){
+        if(loggedUser != null)
+            return loggedUser.toString();
+        return "No user logged";
+    }
 
-    public String logout(){
+    public String logout(){//seta loggedUser como null -  se não há usuários logados, deslogou quem tava logado.
         if(loggedUser != null) {
             loggedUser = null;
             return "Logout sucessefull";
@@ -46,8 +51,8 @@ public class UserManagment {
         return "No user logged in";
     }
 
-    public void writeUsers() throws IOException
-    {
+    public void writeUsers() throws IOException//Faz a escrita da lista de usuários no arquivo usersList.txt, no padrão
+    {//(int)-(string), para verificar, posteriormente, se o usuário é um gerente da loja
         StringBuilder allUsers = new StringBuilder();
         for(User user : users){
             allUsers.append(user.isManager + "-" + user.getName()  + "\n");
