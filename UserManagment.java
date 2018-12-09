@@ -40,7 +40,7 @@ public class UserManagment {
     public User whosLogged(){//Função que retorna o usuário que está logado
         if(loggedUser != null)
             return loggedUser;
-        return "No user logged";
+        return null;
     }
 
     public String logout(){//seta loggedUser como null -  se não há usuários logados, deslogou quem tava logado.
